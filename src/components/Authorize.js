@@ -20,9 +20,6 @@ const Authorize = () => {
         };
         setCredentials(newCredentials);
   
-        // Log the new credentials
-        // console.log("app id: ", newCredentials.applicationId);
-  
       } catch (error) {
         console.error('Error fetching credentials:', error);
       }
@@ -41,8 +38,6 @@ const Authorize = () => {
   const baseUrl = credentials.environment === "production" ? "https://connect.squareup.com" : "https://connect.squareupsandbox.com";
   
   const url = `${baseUrl}/oauth2/authorize?client_id=${credentials.applicationId}&scope=PAYMENTS_READ&session=false&state=${state}`;
-  
-  // console.log("url: ", url)
 
   return (
     <div className='wrapper'>
