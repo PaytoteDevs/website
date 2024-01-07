@@ -17,7 +17,7 @@ import {
   View,
   Card,
 } from "@aws-amplify/ui-react";
-
+// small change
 Amplify.configure(config);
 
 const Contact = ({ signOut }) => {
