@@ -21,7 +21,7 @@ const Authorize = () => {
         setCredentials(newCredentials);
   
         // Log the new credentials
-        console.log("app id: ", newCredentials.applicationId);
+        // console.log("app id: ", newCredentials.applicationId);
   
       } catch (error) {
         console.error('Error fetching credentials:', error);
@@ -42,7 +42,7 @@ const Authorize = () => {
   
   const url = `${baseUrl}/oauth2/authorize?client_id=${credentials.applicationId}&scope=PAYMENTS_READ&session=false&state=${state}`;
   
-  console.log("url: ", url)
+  // console.log("url: ", url)
 
   return (
     <div className='wrapper'>
