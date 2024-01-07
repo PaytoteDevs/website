@@ -21,7 +21,7 @@ const Authorize = () => {
         setCredentials(newCredentials);
   
         // Log the new credentials
-        // console.log("app id: ", newCredentials.applicationId);
+        console.log("app id: ", newCredentials.applicationId);
   
       } catch (error) {
         console.error('Error fetching credentials:', error);
