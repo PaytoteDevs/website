@@ -41,7 +41,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/get-demo" element={<DemoProduct />} /> 
-            <Route path="/signup" element={<MainStorePage />} /> 
+            <Route path="/login" element={<MainStorePage />} /> 
           </Routes>
         </ScrollToTop>
       </Router>
