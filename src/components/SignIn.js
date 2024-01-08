@@ -24,7 +24,7 @@ const SignIn = ({ signOut, setIsAuthenticated }) => {
   const [notes, setNotes] = useState([]);
 
   useEffect(() => {
-    setIsAuthenticated();
+    setIsAuthenticated(true);
     fetchNotes();
   }, []);
 
