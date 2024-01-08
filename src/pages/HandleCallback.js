@@ -1,5 +1,5 @@
 import React from 'react'
-import { HashLink } from 'react-router-hash-link';
+import SignIn from '../components/SignIn';
 
 const HandleCallback = () => {
     // do work in database to show that they've signed in succesfully
