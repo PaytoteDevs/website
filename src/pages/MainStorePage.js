@@ -15,9 +15,9 @@ const GlobalVariableProvider = ({ children }) => {
 }
 
 function MainStorePage() {
-  const { isAuthenticated, setIsAuthenticated } = React.useContext(GlobalVariableProvider);
+  const { isAuthenticated, setIsAuthenticated } = useContext(GlobalVariableProvider);
   // const [isAuthenticated, setIsAuthenticated] = useState(false);
-
+  console.log(isAuthenticated)
   return (
     <div>
       <SignIn setIsAuthenticated={setIsAuthenticated} />
