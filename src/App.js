@@ -36,17 +36,17 @@ function App() {
 
   return (
     <>
-      <Router>
-        <ScrollToTop>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/get-demo" element={<DemoProduct />} /> 
-            <Route path="/login" element={<MainStorePage />} />
-            <Route path="/login/callback" element={<HandleCallback />} /> 
-          </Routes>
-        </ScrollToTop>
-      </Router>
+        <Router>
+          <ScrollToTop>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/get-demo" element={<DemoProduct />} /> 
+              <Route path="/login" element={<MainStorePage />} />
+              <Route path="/login/callback" element={<HandleCallback />} /> 
+            </Routes>
+          </ScrollToTop>
+        </Router>
     </>
   );
 }
