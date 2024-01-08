@@ -3,7 +3,6 @@ import SignIn from '../components/SignIn';
 import GlobalVariableProvider from '../App';
 
 import { useState, useContext } from 'react';
-import { LoginContext } from '../Contexts/LoginContext';
 import { createContext, useReducer } from 'react';
 
 function MainStorePage() {

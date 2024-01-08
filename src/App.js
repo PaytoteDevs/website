@@ -16,7 +16,6 @@ import {useDocTitle} from './components/CustomHook';
 import ScrollToTop from './components/ScrollToTop';
 import MainStorePage from './pages/MainStorePage';
 import HandleCallback from './pages/HandleCallback';
-import { GlobalVariableProvider } from './Contexts/LoginContext';
 
 function App() {
   useEffect(() => {
@@ -37,7 +36,6 @@ function App() {
 
   return (
     <>
-      <GlobalVariableProvider>
           <Router>
             <ScrollToTop>
               <Routes>
@@ -49,7 +47,6 @@ function App() {
               </Routes>
             </ScrollToTop>
           </Router>
-        </GlobalVariableProvider>
     </>
   );
 }
