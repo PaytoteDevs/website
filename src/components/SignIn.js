@@ -22,7 +22,7 @@ const client = generateClient();
 
 const SignIn = ({ signOut, setIsAuthenticated }) => {
   const [notes, setNotes] = useState([]);
-
+  debugger;
   useEffect(() => {
     setIsAuthenticated(true);
     fetchNotes();
