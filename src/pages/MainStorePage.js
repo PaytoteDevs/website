@@ -3,6 +3,7 @@ import SignIn from '../components/SignIn';
 import GlobalVariableProvider from '../App';
 
 import { useState, useContext } from 'react';
+import { LoginContext } from '../Contexts/LoginContext';
 // const GlobalVariableContext = createContext();
 
 // const GlobalVariableProvider = ({ children }) => {
@@ -20,7 +21,9 @@ function MainStorePage() {
   console.log(isAuthenticated)
   return (
     <div>
-      <SignIn setIsAuthenticated={setIsAuthenticated} />
+      <LoginContext.Provider value={{ isAuthenticated, setIsAuthenticated }}>
+        <SignIn setIsAuthenticated={setIsAuthenticated} />
+      </LoginContext.Provider>
     </div>
   );
 }
