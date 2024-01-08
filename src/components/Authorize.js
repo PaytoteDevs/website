@@ -24,7 +24,6 @@ const Authorize = () => {
         console.error('Error fetching credentials:', error);
       }
     };
-  
     fetchCredentials();
   
     // Generate a secure, random token
@@ -38,7 +37,7 @@ const Authorize = () => {
   const baseUrl = credentials.environment === "production" ? "https://connect.squareup.com" : "https://connect.squareupsandbox.com";
   
   const url = `${baseUrl}/oauth2/authorize?client_id=${credentials.applicationId}&scope=PAYMENTS_READ&session=false&state=${state}`;
-
+  console.log(url)
   return (
     <div className='wrapper'>
       <a className='btn' href={url}>

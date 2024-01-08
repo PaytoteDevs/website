@@ -15,6 +15,7 @@ import DemoProduct from './pages/DemoProduct';
 import {useDocTitle} from './components/CustomHook';
 import ScrollToTop from './components/ScrollToTop';
 import MainStorePage from './pages/MainStorePage';
+import HandleCallback from './pages/HandleCallback';
 
 function App() {
   useEffect(() => {
@@ -41,7 +42,8 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/get-demo" element={<DemoProduct />} /> 
-            <Route path="/login" element={<MainStorePage />} /> 
+            <Route path="/login" element={<MainStorePage />} />
+            <Route path="/login/callback" element={<HandleCallback />} /> 
           </Routes>
         </ScrollToTop>
       </Router>
