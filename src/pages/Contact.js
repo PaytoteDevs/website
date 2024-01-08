@@ -8,7 +8,6 @@ import Notiflix from 'notiflix';
 import { Amplify } from 'aws-amplify';
 import config from '../aws-exports';
 import "@aws-amplify/ui-react/styles.css";
-import MainStorePage from './MainStorePage';
 Amplify.configure(config);
 
 const Contact = ({ signOut }) => {

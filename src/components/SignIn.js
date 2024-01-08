@@ -19,10 +19,11 @@ import { generateClient } from 'aws-amplify/api';
 
 const client = generateClient();
 
-const SignIn = ({ signOut }) => {
+const SignIn = ({ signOut, setIsAuthenticated }) => {
   const [notes, setNotes] = useState([]);
 
   useEffect(() => {
+    setIsAuthenticated();
     fetchNotes();
   }, []);
 

@@ -1,19 +1,21 @@
-import React from 'react'
-import SignIn from '../components/SignIn'
+import React, { useState } from 'react';
+import SignIn from '../components/SignIn';
 import Authorize from '../components/Authorize';
 
-const MainStorePage = () => {
+function MainStorePage() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   return (
     <div>
-        <SignIn />
+      <SignIn setIsAuthenticated={setIsAuthenticated} />
+      {isAuthenticated && (
         <div>
-            <div> Hi! Click here to sign your store up on PayTote!</div>
-            <Authorize/>
+          <div> Hi! Click here to sign your store up on PayTote!</div>
+          <Authorize />
         </div>
-
+      )}
     </div>
-  )
+  );
 }
 
-export default MainStorePage
+export default MainStorePage;
