@@ -1,47 +1,50 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const createNote = /* GraphQL */ `
-  mutation CreateNote(
-    $input: CreateNoteInput!
-    $condition: ModelNoteConditionInput
+export const createAuthentications = /* GraphQL */ `
+  mutation CreateAuthentications(
+    $input: CreateAuthenticationsInput!
+    $condition: ModelAuthenticationsConditionInput
   ) {
-    createNote(input: $input, condition: $condition) {
+    createAuthentications(input: $input, condition: $condition) {
       id
-      name
-      description
+      Square
+      Stripe
       createdAt
       updatedAt
+      owner
       __typename
     }
   }
 `;
-export const updateNote = /* GraphQL */ `
-  mutation UpdateNote(
-    $input: UpdateNoteInput!
-    $condition: ModelNoteConditionInput
+export const updateAuthentications = /* GraphQL */ `
+  mutation UpdateAuthentications(
+    $input: UpdateAuthenticationsInput!
+    $condition: ModelAuthenticationsConditionInput
   ) {
-    updateNote(input: $input, condition: $condition) {
+    updateAuthentications(input: $input, condition: $condition) {
       id
-      name
-      description
+      Square
+      Stripe
       createdAt
       updatedAt
+      owner
       __typename
     }
   }
 `;
-export const deleteNote = /* GraphQL */ `
-  mutation DeleteNote(
-    $input: DeleteNoteInput!
-    $condition: ModelNoteConditionInput
+export const deleteAuthentications = /* GraphQL */ `
+  mutation DeleteAuthentications(
+    $input: DeleteAuthenticationsInput!
+    $condition: ModelAuthenticationsConditionInput
   ) {
-    deleteNote(input: $input, condition: $condition) {
+    deleteAuthentications(input: $input, condition: $condition) {
       id
-      name
-      description
+      Square
+      Stripe
       createdAt
       updatedAt
+      owner
       __typename
     }
   }

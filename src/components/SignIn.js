@@ -11,8 +11,10 @@ import {
   withAuthenticator,
 } from "@aws-amplify/ui-react";
 import { generateClient } from 'aws-amplify/api';
-import { createAuthentications } from '../graphql/mutations';
-import { updateAuthentications } from '../graphql/mutations';
+import { createAuthentications, 
+        updateAuthentications, 
+      } from '../graphql/mutations';
+import { listAuthentications, getAuthentications } from "../graphql/queries";
 import Authorize from './Authorize'
 
 const client = generateClient();
@@ -21,34 +23,25 @@ const SignIn = ({ signOut }) => {
   const [isStripeEnabled, setIsStripeEnabled] = useState(false);
     const [isSquareEnabled, setIsSquareEnabled] = useState(false);
 
-    async function createAuthentications() {
-      await client.graphql({
-        query: createAuthentications,
-        variables: {
-            input: {
-        "Square": false,
-        "Stripe": false
-      }
-        }
-      });
-      }
-
-    // createAuthentications()
     
-    // const updatedAuthentications = await client.graphql({
-    //   query: updateAuthentications,
-    //   variables: {
-    //       input: {
-    //   "Square": true,
-    //   "Stripe": true
-    // }
-    //   }
-    // });
 
-    // useEffect(() => {
-    //     fetchAuthentications(1);
-    // }, []);
+    // create just one instance of an authentications object
+    // have them properly updated with their values based on the fetch function
+    // List all items
+    async function getAllAuthentications() {
+      const allAuthentications = await client.graphql({
+          query: listAuthentications
+      });
+      console.log("authentications: ", allAuthentications);
+      return allAuthentications;
+  }
+  let data = getAllAuthentications()
+  let auth1 = data[0]
+  console.log("auth struct: ", auth1)
 
+
+
+  
   return (
     <View className="App">
       <Flex direction="row" justifyContent="center" alignItems="center" margin="1rem 0">

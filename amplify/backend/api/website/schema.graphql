@@ -1,4 +1,4 @@
-type Authentications @model @auth(rules: [{allow: public}]) {
+type Authentications @model @auth(rules: [{allow: public}, {allow: owner, operations: [create, read, update]}]) {
   id: ID!
   Square: Boolean
   Stripe: Boolean
