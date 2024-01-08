@@ -16,6 +16,7 @@ import {
   deleteNote as deleteNoteMutation,
 } from "../graphql/mutations";
 import { generateClient } from 'aws-amplify/api';
+import Authorize from '../components/Authorize';
 
 const client = generateClient();
 
@@ -103,6 +104,10 @@ const SignIn = ({ signOut, setIsAuthenticated }) => {
         ))}
       </View>
       <Button onClick={signOut}>Sign Out</Button>
+      <div>
+        <div> Hi! Click here to sign your store up on PayTote!</div>
+        <Authorize />
+      </div>
     </View>
   );
 };
