@@ -4,26 +4,15 @@ import GlobalVariableProvider from '../App';
 
 import { useState, useContext } from 'react';
 import { LoginContext } from '../Contexts/LoginContext';
-// const GlobalVariableContext = createContext();
-
-// const GlobalVariableProvider = ({ children }) => {
-//   const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-//   return (
-//       <GlobalVariableContext.Provider value={{ isAuthenticated, setIsAuthenticated }}>
-//           {children}
-//       </GlobalVariableContext.Provider>
-//   );
-// }
+import { createContext, useReducer } from 'react';
 
 function MainStorePage() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  console.log(isAuthenticated)
+  console.log("authenticated value: ", isAuthenticated);
+
   return (
     <div>
-      <LoginContext.Provider value={{ isAuthenticated, setIsAuthenticated }}>
-        <SignIn setIsAuthenticated={setIsAuthenticated} />
-      </LoginContext.Provider>
+      <SignIn />
     </div>
   );
 }
