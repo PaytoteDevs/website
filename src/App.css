@@ -1,0 +1,12 @@
+.button-enabled {
+    background-color: green; /* Green background for enabled state */
+    color: white; /* White text color */
+    /* Add any other styling as needed */
+}
+
+.button-disabled {
+    background-color: red; /* Red background for disabled state */
+    color: white; /* White text color */
+    /* Additional disabled state styling */
+    cursor: not-allowed; /* Change cursor to indicate non-interactivity */
+}

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-// import "./App.css";
+import "../App.css";
 import "@aws-amplify/ui-react/styles.css";
 import {
   Button,
@@ -10,104 +10,67 @@ import {
   View,
   withAuthenticator,
 } from "@aws-amplify/ui-react";
-import { listNotes } from "../graphql/queries";
-import {
-  createNote as createNoteMutation,
-  deleteNote as deleteNoteMutation,
-} from "../graphql/mutations";
 import { generateClient } from 'aws-amplify/api';
-import Authorize from '../components/Authorize';
+import { createAuthentications } from '../graphql/mutations';
+import { updateAuthentications } from '../graphql/mutations';
+import Authorize from './Authorize'
 
 const client = generateClient();
 
 const SignIn = ({ signOut }) => {
-  const [notes, setNotes] = useState([]);
-  debugger;
-  useEffect(() => {
-    // setIsAuthenticated();
-    fetchNotes();
-  }, []);
+  const [isStripeEnabled, setIsStripeEnabled] = useState(false);
+    const [isSquareEnabled, setIsSquareEnabled] = useState(false);
 
-  async function fetchNotes() {
-    const apiData = await client.graphql({ query: listNotes });
-    const notesFromAPI = apiData.data.listNotes.items;
-    setNotes(notesFromAPI);
-  }
+    async function createAuthentications() {
+      await client.graphql({
+        query: createAuthentications,
+        variables: {
+            input: {
+        "Square": false,
+        "Stripe": false
+      }
+        }
+      });
+      }
 
-  async function createNote(event) {
-    event.preventDefault();
-    const form = new FormData(event.target);
-    const data = {
-      name: form.get("name"),
-      description: form.get("description"),
-    };
-    await client.graphql({
-      query: createNoteMutation,
-      variables: { input: data },
-    });
-    fetchNotes();
-    event.target.reset();
-  }
+    // createAuthentications()
+    
+    // const updatedAuthentications = await client.graphql({
+    //   query: updateAuthentications,
+    //   variables: {
+    //       input: {
+    //   "Square": true,
+    //   "Stripe": true
+    // }
+    //   }
+    // });
 
-  async function deleteNote({ id }) {
-    const newNotes = notes.filter((note) => note.id !== id);
-    setNotes(newNotes);
-    await client.graphql({
-      query: deleteNoteMutation,
-      variables: { input: { id } },
-    });
-  }
+    // useEffect(() => {
+    //     fetchAuthentications(1);
+    // }, []);
 
   return (
     <View className="App">
-      <Heading level={1}>My Notes App</Heading>
-      <View as="form" margin="3rem 0" onSubmit={createNote}>
-        <Flex direction="row" justifyContent="center">
-          <TextField
-            name="name"
-            placeholder="Note Name"
-            label="Note Name"
-            labelHidden
-            variation="quiet"
-            required
-          />
-          <TextField
-            name="description"
-            placeholder="Note Description"
-            label="Note Description"
-            labelHidden
-            variation="quiet"
-            required
-          />
-          <Button type="submit" variation="primary">
-            Create Note
-          </Button>
-        </Flex>
-      </View>
-      <Heading level={2}>Current Notes</Heading>
-      <View margin="3rem 0">
-        {notes.map((note) => (
-          <Flex
-            key={note.id || note.name}
-            direction="row"
-            justifyContent="center"
-            alignItems="center"
-          >
-            <Text as="strong" fontWeight={700}>
-              {note.name}
-            </Text>
-            <Text as="span">{note.description}</Text>
-            <Button variation="link" onClick={() => deleteNote(note)}>
-              Delete note
-            </Button>
-          </Flex>
-        ))}
-      </View>
-      <Button onClick={signOut}>Sign Out</Button>
-      <div>
-        <div> Hi! Click here to sign your store up on PayTote!</div>
-        <Authorize />
-      </div>
+      <Flex direction="row" justifyContent="center" alignItems="center" margin="1rem 0">
+                      <Button 
+                    className={isStripeEnabled ? "button-enabled" : "button-disabled"}
+                    disabled={!isStripeEnabled}
+                >
+                    Stripe
+                </Button>
+                <Button 
+                    className={isSquareEnabled ? "button-enabled" : "button-disabled"}
+                    disabled={!isSquareEnabled}
+                >
+                    Square
+                </Button>
+
+            </Flex>
+
+            <div>
+              <div> Hi! Click here to sign your store up on PayTote!</div>
+              <Authorize />
+            </div>
     </View>
   );
 };
