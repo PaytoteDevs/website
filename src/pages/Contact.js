@@ -5,11 +5,10 @@ import {useDocTitle} from '../components/CustomHook';
 import axios from 'axios';
 // import emailjs from 'emailjs-com';
 import Notiflix from 'notiflix';
-import Authorize from '../components/Authorize';
 import { Amplify } from 'aws-amplify';
 import config from '../aws-exports';
 import "@aws-amplify/ui-react/styles.css";
-import SignIn from '../components/SignIn';
+import MainStorePage from './MainStorePage';
 Amplify.configure(config);
 
 const Contact = ({ signOut }) => {
@@ -88,13 +87,6 @@ const Contact = ({ signOut }) => {
             </div>
             <div id='contact' className="flex justify-center items-center mt-8 w-full bg-white py-12 lg:py-24 ">
                 <div className="container mx-auto my-8 px-4 lg:px-20" data-aos="zoom-in">
-
-                <SignIn />
-
-                <div>
-                    <div> Hi! Click here to sign your store up on PayTote!</div>
-                    <Authorize/>
-                </div>
 
                 <form onSubmit={sendEmail}>
 

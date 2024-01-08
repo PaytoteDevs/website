@@ -14,6 +14,7 @@ import DemoProduct from './pages/DemoProduct';
 
 import {useDocTitle} from './components/CustomHook';
 import ScrollToTop from './components/ScrollToTop';
+import MainStorePage from './pages/MainStorePage';
 
 function App() {
   useEffect(() => {
@@ -40,6 +41,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/get-demo" element={<DemoProduct />} /> 
+            <Route path="/signup" element={<MainStorePage />} /> 
           </Routes>
         </ScrollToTop>
       </Router>
