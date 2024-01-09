@@ -23,7 +23,7 @@ const client = generateClient();
 // for showing status of POS sign on, when the user first signs on, they are are creating an object that keeps track of integrations
 // every time we fetch the POS status object and render the statuses
 // In HandleCallBack.js, we update the statuses appropriately after a successful sign on has been made
-const SignIn = ({ signOut }) => {
+const SignIn = ({ signOut, authType, message }) => {
   const [isStripeEnabled, setIsStripeEnabled] = useState(false);
   const [isSquareEnabled, setIsSquareEnabled] = useState(false);
 
@@ -113,13 +113,18 @@ const SignIn = ({ signOut }) => {
                       <Button 
                     className={isStripeEnabled ? "button-enabled" : "button-disabled"}
                     disabled={!isStripeEnabled}
-                >
-                  {/* { */}
-                    {/* add in check to see if enabled and prop up disconncet ubtton, do same for stripe */}
-                  {/* } */}
+                > 
 
                     Stripe
                 </Button>
+
+                {/* add in check to see if enabled and prop up disconncet ubtton, do same for stripe */}
+                {authType ? message :
+                      (
+                        isSquareEnabled ? "connected" :"disconnected"
+                      )
+                }
+
                 <Button 
                     className={isSquareEnabled ? "button-enabled" : "button-disabled"}
                     disabled={!isSquareEnabled}
