@@ -71,7 +71,7 @@ const HandleCallback = () => {
   const [token, setToken] = useState('');
   const [error, setError] = useState('');
 
-  const handleGetToken = async (authorizationCode) => {
+  async function handleGetToken(authorizationCode) {
     const url = 'https://connect.squareupsandbox.com/oauth2/token';
     const data = {
       client_id: credentials.applicationId,
