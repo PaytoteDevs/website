@@ -28,7 +28,7 @@ const HandleCallback = () => {
         query: updateAuthentications,
         variables: {
             input: {
-              "input": id,
+              "id": id,
               "Square": true,
               "Stripe": false,
               "userID": userID
