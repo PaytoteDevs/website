@@ -68,6 +68,40 @@ const HandleCallback = () => {
     await updatedAuthentications(data[0].id, userID)
   }
 
+  const [token, setToken] = useState('');
+  const [error, setError] = useState('');
+
+  const handleGetToken = async (authorizationCode) => {
+    const url = 'https://connect.squareupsandbox.com/oauth2/token';
+    const data = {
+      client_id: credentials.applicationId,
+      client_secret: credentials.applicationSecret,
+      code: authorizationCode,
+      grant_type: 'authorization_code'
+    };
+
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Square-Version': '2021-05-13',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const responseData = await response.json();
+      console.log("user's obtain token: ", responseData.access_token)
+      setToken(responseData.access_token); // Assuming the token is in responseData.access_token
+    } catch (error) {
+      setError('Failed to fetch token: ' + error.message);
+    }
+  };
+
   const [code, setCode] = useState('');
   const [responseType, setResponseType] = useState('');
   const [stateToken, setStateToken] = useState('');
@@ -105,6 +139,8 @@ const HandleCallback = () => {
 
     setResponseType(queryParams.get('response_type'));
     setStateToken(queryParams.get('state'));
+
+
   }, []); // Empty dependency array means it runs once after the first render
 
   return (
