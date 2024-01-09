@@ -22,6 +22,7 @@ const HandleCallback = () => {
   }
 
   async function updatedAuthentications(userID) {
+    console.log(userID)
     try {
       const response = await client.graphql({
         query: updateAuthentications,
