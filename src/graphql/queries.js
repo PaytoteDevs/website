@@ -7,6 +7,7 @@ export const getAuthentications = /* GraphQL */ `
       id
       Square
       Stripe
+      userID
       createdAt
       updatedAt
       owner
@@ -25,6 +26,7 @@ export const listAuthentications = /* GraphQL */ `
         id
         Square
         Stripe
+        userID
         createdAt
         updatedAt
         owner

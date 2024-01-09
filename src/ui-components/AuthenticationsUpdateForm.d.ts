@@ -5,7 +5,7 @@
  **************************************************************************/
 
 import * as React from "react";
-import { GridProps, SwitchFieldProps } from "@aws-amplify/ui-react";
+import { GridProps, SwitchFieldProps, TextFieldProps } from "@aws-amplify/ui-react";
 export declare type EscapeHatchProps = {
     [elementHierarchy: string]: Record<string, unknown>;
 } | null;
@@ -24,16 +24,19 @@ export declare type ValidationFunction<T> = (value: T, validationResponse: Valid
 export declare type AuthenticationsUpdateFormInputValues = {
     Square?: boolean;
     Stripe?: boolean;
+    userID?: string;
 };
 export declare type AuthenticationsUpdateFormValidationValues = {
     Square?: ValidationFunction<boolean>;
     Stripe?: ValidationFunction<boolean>;
+    userID?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type AuthenticationsUpdateFormOverridesProps = {
     AuthenticationsUpdateFormGrid?: PrimitiveOverrideProps<GridProps>;
     Square?: PrimitiveOverrideProps<SwitchFieldProps>;
     Stripe?: PrimitiveOverrideProps<SwitchFieldProps>;
+    userID?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
 export declare type AuthenticationsUpdateFormProps = React.PropsWithChildren<{
     overrides?: AuthenticationsUpdateFormOverridesProps | undefined | null;

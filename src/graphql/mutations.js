@@ -10,6 +10,7 @@ export const createAuthentications = /* GraphQL */ `
       id
       Square
       Stripe
+      userID
       createdAt
       updatedAt
       owner
@@ -26,6 +27,7 @@ export const updateAuthentications = /* GraphQL */ `
       id
       Square
       Stripe
+      userID
       createdAt
       updatedAt
       owner
@@ -42,6 +44,7 @@ export const deleteAuthentications = /* GraphQL */ `
       id
       Square
       Stripe
+      userID
       createdAt
       updatedAt
       owner

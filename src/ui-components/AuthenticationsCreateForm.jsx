@@ -6,7 +6,13 @@
 
 /* eslint-disable */
 import * as React from "react";
-import { Button, Flex, Grid, SwitchField } from "@aws-amplify/ui-react";
+import {
+  Button,
+  Flex,
+  Grid,
+  SwitchField,
+  TextField,
+} from "@aws-amplify/ui-react";
 import { fetchByPath, getOverrideProps, validateField } from "./utils";
 import { generateClient } from "aws-amplify/api";
 import { createAuthentications } from "../graphql/mutations";
@@ -25,18 +31,22 @@ export default function AuthenticationsCreateForm(props) {
   const initialValues = {
     Square: false,
     Stripe: false,
+    userID: "",
   };
   const [Square, setSquare] = React.useState(initialValues.Square);
   const [Stripe, setStripe] = React.useState(initialValues.Stripe);
+  const [userID, setUserID] = React.useState(initialValues.userID);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     setSquare(initialValues.Square);
     setStripe(initialValues.Stripe);
+    setUserID(initialValues.userID);
     setErrors({});
   };
   const validations = {
     Square: [],
     Stripe: [],
+    userID: [],
   };
   const runValidationTasks = async (
     fieldName,
@@ -66,6 +76,7 @@ export default function AuthenticationsCreateForm(props) {
         let modelFields = {
           Square,
           Stripe,
+          userID,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -130,6 +141,7 @@ export default function AuthenticationsCreateForm(props) {
             const modelFields = {
               Square: value,
               Stripe,
+              userID,
             };
             const result = onChange(modelFields);
             value = result?.Square ?? value;
@@ -155,6 +167,7 @@ export default function AuthenticationsCreateForm(props) {
             const modelFields = {
               Square,
               Stripe: value,
+              userID,
             };
             const result = onChange(modelFields);
             value = result?.Stripe ?? value;
@@ -169,6 +182,32 @@ export default function AuthenticationsCreateForm(props) {
         hasError={errors.Stripe?.hasError}
         {...getOverrideProps(overrides, "Stripe")}
       ></SwitchField>
+      <TextField
+        label="User id"
+        isRequired={false}
+        isReadOnly={false}
+        value={userID}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              Square,
+              Stripe,
+              userID: value,
+            };
+            const result = onChange(modelFields);
+            value = result?.userID ?? value;
+          }
+          if (errors.userID?.hasError) {
+            runValidationTasks("userID", value);
+          }
+          setUserID(value);
+        }}
+        onBlur={() => runValidationTasks("userID", userID)}
+        errorMessage={errors.userID?.errorMessage}
+        hasError={errors.userID?.hasError}
+        {...getOverrideProps(overrides, "userID")}
+      ></TextField>
       <Flex
         justifyContent="space-between"
         {...getOverrideProps(overrides, "CTAFlex")}
