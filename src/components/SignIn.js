@@ -24,7 +24,7 @@ const client = generateClient();
 // every time we fetch the POS status object and render the statuses
 // In HandleCallBack.js, we update the statuses appropriately after a successful sign on has been made
 const SignIn = ({ signOut, authType, message }) => {
-  console.log(authType, message)
+  // console.log(authType, message)
   const [isStripeEnabled, setIsStripeEnabled] = useState(false);
   const [isSquareEnabled, setIsSquareEnabled] = useState(false);
 

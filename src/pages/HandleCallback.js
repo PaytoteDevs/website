@@ -4,6 +4,7 @@ import { generateClient } from "aws-amplify/api";
 import { updateAuthentications } from '../graphql/mutations';
 import { getCurrentUser } from 'aws-amplify/auth';
 import { listAuthentications, getAuthentications } from "../graphql/queries";
+import axios from 'axios';
 
 const client = generateClient()
 
@@ -28,12 +29,12 @@ const HandleCallback = () => {
             query: listAuthentications // modify to filter for only ones that hold email equal to whatever user email is, need to update model too
         });
         const allAuthentications = response.data;
-        console.log("authentications: ", allAuthentications);
+        // console.log("authentications: ", allAuthentications);
         const userAuthentication = allAuthentications.listAuthentications.items.filter(item => {
           return item.userID === desiredUserId
         })
 
-        console.log("filtered authentications: ", userAuthentication);
+        // console.log("filtered authentications: ", userAuthentication);
         return userAuthentication;
     } catch (error) {
         // console.error("Error fetching authentications: ", error);
@@ -42,7 +43,7 @@ const HandleCallback = () => {
   }
 
   async function updatedAuthentications(id, userID) {
-    console.log(id, userID)
+    // console.log(id, userID)
     try {
       const response = await client.graphql({
         query: updateAuthentications,
@@ -64,18 +65,48 @@ const HandleCallback = () => {
   async function fetchDataAndUpdate() {
     const userID = await currentAuthenticatedUser()
     let data = await getAllAuthentications(userID);
-    console.log(data[0])
     await updatedAuthentications(data[0].id, userID)
   }
 
+  const [code, setCode] = useState('');
+  const [responseType, setResponseType] = useState('');
+  const [stateToken, setStateToken] = useState('');
+
+
+  const [credentials, setCredentials] = useState({
+    applicationId: '',
+    environment: '',
+    applicationSecret: ''
+  });
+
   useEffect(() => {
+    // get app secret so that we can call obtain token api
+    const fetchCredentials = async () => {
+      try {
+        const response = await axios.get('https://av1iknmhhd.execute-api.us-west-1.amazonaws.com/v1');
+        const newCredentials = {
+          applicationId: response.data.SQ_APPLICATION_ID,
+          environment: response.data.SQ_ENVIRONMENT,
+          applicationSecret: response.data.SQ_APPLICATION_SECRET
+        };
+        setCredentials(newCredentials);
+  
+      } catch (error) {
+        console.error('Error fetching credentials:', error);
+      }
+    };
+    fetchCredentials();
+
+
     fetchDataAndUpdate();
+    const queryParams = new URLSearchParams(window.location.search);
+    setCode(queryParams.get('code'));
+    console.log("code: ", queryParams.get('code'))
+
+    setResponseType(queryParams.get('response_type'));
+    setStateToken(queryParams.get('state'));
   }, []); // Empty dependency array means it runs once after the first render
 
-
-//   call square update funtion here
-  // import the general clients and stuff needed
-  // get the one which is tied to user email, then update it, we need user's email though
   return (
     <SignIn authType="Square" message="Successfully authorized"/>
   );
