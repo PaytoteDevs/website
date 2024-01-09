@@ -3,6 +3,7 @@ import SignIn from '../components/SignIn';
 import { generateClient } from "aws-amplify/api";
 import { updateAuthentications } from '../graphql/mutations';
 import { getCurrentUser } from 'aws-amplify/auth';
+import { listAuthentications, getAuthentications } from "../graphql/queries";
 
 const client = generateClient()
 
@@ -11,13 +12,32 @@ const HandleCallback = () => {
   console.log("data work will go here! set square auth status to true, update db etc.")
   async function currentAuthenticatedUser() {
     try {
-      const { id, username, userId, signInDetails } = await getCurrentUser();
+      const { username, userId, signInDetails } = await getCurrentUser();
       // console.log(`The username: ${username}`);
       // console.log(`The userId: ${userId}`);
       // console.log(`The signInDetails: ${signInDetails}`);
-      return [id, userId]
+      return userId
     } catch (err) {
       console.log(err);
+    }
+  }
+
+  async function getAllAuthentications(desiredUserId) {
+    try {
+        const response = await client.graphql({
+            query: listAuthentications // modify to filter for only ones that hold email equal to whatever user email is, need to update model too
+        });
+        const allAuthentications = response.data;
+        console.log("authentications: ", allAuthentications);
+        const userAuthentication = allAuthentications.listAuthentications.items.filter(item => {
+          return item.userID === desiredUserId
+        })
+
+        console.log("filtered authentications: ", userAuthentication);
+        return userAuthentication;
+    } catch (error) {
+        // console.error("Error fetching authentications: ", error);
+        return []; // Return an empty array in case of error
     }
   }
 
@@ -42,10 +62,9 @@ const HandleCallback = () => {
   }
 
   async function fetchDataAndUpdate() {
-    const arr = await currentAuthenticatedUser()
-    const id = arr[0]
-    const userID = arr[1]
-    await updatedAuthentications(id, userID)
+    const userID = await currentAuthenticatedUser()
+    let data = await getAllAuthentications(userID);
+    await updatedAuthentications(data.id, userID)
   }
 
   useEffect(() => {

@@ -93,7 +93,7 @@ const SignIn = ({ signOut }) => {
       isCreatingAuthentications = true;
       await newAuthentications(desiredUserId)
       isCreatingAuthentications = false;
-      let data = await getAllAuthentications();
+      let data = await getAllAuthentications(desiredUserId);
     }
 
     // console.log("data: ", data.listAuthentications.items[0])
