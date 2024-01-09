@@ -64,7 +64,8 @@ const HandleCallback = () => {
   async function fetchDataAndUpdate() {
     const userID = await currentAuthenticatedUser()
     let data = await getAllAuthentications(userID);
-    await updatedAuthentications(data.id, userID)
+    console.log(data[0])
+    await updatedAuthentications(data[0].id, userID)
   }
 
   useEffect(() => {
