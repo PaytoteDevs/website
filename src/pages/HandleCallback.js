@@ -140,6 +140,8 @@ const HandleCallback = () => {
     setResponseType(queryParams.get('response_type'));
     setStateToken(queryParams.get('state'));
 
+    //now call obtain token api
+    handleGetToken(code)
 
   }, []); // Empty dependency array means it runs once after the first render
 
