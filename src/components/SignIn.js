@@ -96,10 +96,10 @@ const SignIn = ({ signOut }) => {
       data = await getAllAuthentications(desiredUserId);
     }
 
-    console.log("data: ", data)
-    console.log("data[0]: ", data[0])
-    setIsStripeEnabled(data.Stripe);
-    setIsSquareEnabled(data.Square);
+    // console.log("data: ", data)
+    // console.log("data[0]: ", data[0])
+    setIsStripeEnabled(data[0].Stripe);
+    setIsSquareEnabled(data[0].Square);
     return data
 }
 
