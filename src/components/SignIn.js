@@ -93,10 +93,11 @@ const SignIn = ({ signOut }) => {
       isCreatingAuthentications = true;
       await newAuthentications(desiredUserId)
       isCreatingAuthentications = false;
-      let data = await getAllAuthentications(desiredUserId);
+      data = await getAllAuthentications(desiredUserId);
     }
 
-    // console.log("data: ", data.listAuthentications.items[0])
+    console.log("data: ", data)
+    console.log("data[0]: ", data[0])
     setIsStripeEnabled(data.Stripe);
     setIsSquareEnabled(data.Square);
     return data
