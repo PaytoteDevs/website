@@ -11,23 +11,24 @@ const HandleCallback = () => {
   console.log("data work will go here! set square auth status to true, update db etc.")
   async function currentAuthenticatedUser() {
     try {
-      const { username, userId, signInDetails } = await getCurrentUser();
+      const { id, username, userId, signInDetails } = await getCurrentUser();
       // console.log(`The username: ${username}`);
       // console.log(`The userId: ${userId}`);
       // console.log(`The signInDetails: ${signInDetails}`);
-      return userId
+      return [id, userId]
     } catch (err) {
       console.log(err);
     }
   }
 
-  async function updatedAuthentications(userID) {
-    console.log(userID)
+  async function updatedAuthentications(id, userID) {
+    console.log(id, userID)
     try {
       const response = await client.graphql({
         query: updateAuthentications,
         variables: {
             input: {
+              "input": id,
               "Square": true,
               "Stripe": false,
               "userID": userID
@@ -41,8 +42,10 @@ const HandleCallback = () => {
   }
 
   async function fetchDataAndUpdate() {
-    const userID = await currentAuthenticatedUser()
-    await updatedAuthentications(userID)
+    const arr = await currentAuthenticatedUser()
+    const id = arr[0]
+    const userID = arr[1]
+    await updatedAuthentications(id, userID)
   }
 
   useEffect(() => {
