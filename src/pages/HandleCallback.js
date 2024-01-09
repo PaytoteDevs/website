@@ -77,7 +77,7 @@ const HandleCallback = () => {
   // import the general clients and stuff needed
   // get the one which is tied to user email, then update it, we need user's email though
   return (
-    <SignIn />
+    <SignIn authType="Square" message="Successfully authorized"/>
   );
 };
 
