@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "api": {
+      "website": [
+        "Query",
+        "Mutation",
+        "Subscription"
+      ]
+    },
+    "auth": {
+      "websiteaed68f60": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    }
+  },
+  "lambdaLayers": []
+}
