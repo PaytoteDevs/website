@@ -6,4 +6,6 @@
 
 export { default as AuthenticationsCreateForm } from "./AuthenticationsCreateForm";
 export { default as AuthenticationsUpdateForm } from "./AuthenticationsUpdateForm";
+export { default as UserTokenCreateForm } from "./UserTokenCreateForm";
+export { default as UserTokenUpdateForm } from "./UserTokenUpdateForm";
 export { default as studioTheme } from "./studioTheme";
