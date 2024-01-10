@@ -1,0 +1,49 @@
+# this is an auto generated file. This will be overwritten
+
+subscription OnCreateAuthentications(
+  $filter: ModelSubscriptionAuthenticationsFilterInput
+  $owner: String
+) {
+  onCreateAuthentications(filter: $filter, owner: $owner) {
+    id
+    Square
+    Stripe
+    userID
+    createdAt
+    updatedAt
+    owner
+    __typename
+  }
+}
+
+subscription OnUpdateAuthentications(
+  $filter: ModelSubscriptionAuthenticationsFilterInput
+  $owner: String
+) {
+  onUpdateAuthentications(filter: $filter, owner: $owner) {
+    id
+    Square
+    Stripe
+    userID
+    createdAt
+    updatedAt
+    owner
+    __typename
+  }
+}
+
+subscription OnDeleteAuthentications(
+  $filter: ModelSubscriptionAuthenticationsFilterInput
+  $owner: String
+) {
+  onDeleteAuthentications(filter: $filter, owner: $owner) {
+    id
+    Square
+    Stripe
+    userID
+    createdAt
+    updatedAt
+    owner
+    __typename
+  }
+}

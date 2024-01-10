@@ -1,0 +1,35 @@
+# this is an auto generated file. This will be overwritten
+
+query GetAuthentications($id: ID!) {
+  getAuthentications(id: $id) {
+    id
+    Square
+    Stripe
+    userID
+    createdAt
+    updatedAt
+    owner
+    __typename
+  }
+}
+
+query ListAuthentications(
+  $filter: ModelAuthenticationsFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listAuthentications(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      Square
+      Stripe
+      userID
+      createdAt
+      updatedAt
+      owner
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
